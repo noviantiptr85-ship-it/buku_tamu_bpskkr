@@ -1,0 +1,13 @@
+# Arahkan semua permintaan ke folder public/ jika document root salah diarahkan
+# ke folder proyek. Konfigurasi yang disarankan tetap: DocumentRoot = .../public
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Blokir akses file tersembunyi (.env, .git, dll)
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+Options -Indexes

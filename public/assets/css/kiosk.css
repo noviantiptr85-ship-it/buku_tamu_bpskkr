@@ -1,0 +1,546 @@
+body.kiosk {
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background:
+        radial-gradient(900px 420px at 8% -10%, #FFE7CE 0%, transparent 55%),
+        radial-gradient(900px 500px at 100% 110%, #D6F4F1 0%, transparent 55%),
+        #F7F8FC;
+}
+
+/* ------------------------------------------------------------------ */
+/* Header kiosk                                                        */
+/* ------------------------------------------------------------------ */
+
+.kiosk-header {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 26px;
+    background: rgba(255, 255, 255, 0.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+}
+
+.kiosk-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.kiosk-brand img {
+    width: 46px;
+    height: 46px;
+    flex: none;
+}
+
+.kiosk-brand strong {
+    display: block;
+    font-size: 17px;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.kiosk-brand span {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.kiosk-clock {
+    text-align: right;
+    flex: none;
+}
+
+.kiosk-clock #clock {
+    display: block;
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+}
+
+.kiosk-clock small {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Area utama                                                          */
+/* ------------------------------------------------------------------ */
+
+.kiosk-main {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 16px 26px 4px;
+}
+
+.slideshow {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    border-radius: 22px;
+    overflow: hidden;
+    background: #0B1220;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+    touch-action: pan-y;
+}
+
+.slides-stage {
+    position: absolute;
+    inset: 0;
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 18px 34px;
+    margin: 0;
+    opacity: 0;
+    transition: opacity 0.55s ease;
+    pointer-events: none;
+}
+
+.slide.is-active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.slide-bg {
+    position: absolute;
+    inset: -50px;
+    background-size: cover;
+    background-position: center;
+    filter: blur(36px) saturate(1.1) brightness(0.3);
+    transform: scale(1.12);
+}
+
+.slide img {
+    position: relative;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+}
+
+.slides-dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    z-index: 2;
+}
+
+.dot {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border: 0;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: width 0.2s ease, background 0.2s ease;
+}
+
+.dot.is-active {
+    width: 28px;
+    background: var(--orange);
+}
+
+.slideshow-empty {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 22px;
+    background: #fff;
+    border: 1px dashed #CBD5E1;
+    color: var(--muted);
+    text-align: center;
+    padding: 24px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Tombol CTA                                                          */
+/* ------------------------------------------------------------------ */
+
+.kiosk-cta-wrap {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 0 0;
+}
+
+.kiosk-cta {
+    width: min(540px, 100%);
+    min-height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--orange), var(--orange-2));
+    color: #fff;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    box-shadow: 0 16px 34px rgba(245, 130, 32, 0.36);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.kiosk-cta:hover {
+    box-shadow: 0 18px 38px rgba(245, 130, 32, 0.44);
+}
+
+.kiosk-cta:active {
+    transform: scale(0.985);
+}
+
+.kiosk-cta svg {
+    width: 26px;
+    height: 26px;
+}
+
+.kiosk-welcome {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+    text-align: center;
+}
+
+.kiosk-footer {
+    flex: none;
+    padding: 6px 26px 12px;
+    text-align: center;
+    color: #64748B;
+    font-size: 12px;
+}
+
+.ticker {
+    overflow: hidden;
+    white-space: nowrap;
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.ticker span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ticker 26s linear infinite;
+}
+
+@keyframes ticker {
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* ------------------------------------------------------------------ */
+/* Halaman form (overlay penuh)                                        */
+/* ------------------------------------------------------------------ */
+
+.kiosk-page {
+    position: fixed;
+    inset: 0;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    background:
+        radial-gradient(800px 400px at 0% 0%, #FFE8D2 0%, transparent 55%),
+        radial-gradient(800px 460px at 100% 100%, #D9F5F2 0%, transparent 55%),
+        #F7F8FC;
+}
+
+.kiosk-page .kiosk-header {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+}
+
+.kiosk-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: #fff;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.form-main {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 26px 20px 40px;
+}
+
+.form-card {
+    width: min(720px, 100%);
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+}
+
+.form-card h1 {
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.form-card .lead {
+    color: var(--muted);
+    margin-bottom: 22px;
+    font-size: 14px;
+}
+
+.visit-form .field + .field {
+    margin-top: 18px;
+}
+
+.visit-form .field label {
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    color: #374151;
+}
+
+.visit-form .input,
+.visit-form .textarea {
+    font-size: 18px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border-width: 1.5px;
+}
+
+.visit-form .textarea {
+    min-height: 110px;
+}
+
+.visit-form .error-text {
+    font-size: 13.5px;
+    font-weight: 600;
+}
+
+.visit-form .form-actions {
+    margin-top: 26px;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.visit-form .btn-lg {
+    min-height: 56px;
+    font-size: 17px;
+    padding: 0 28px;
+}
+
+.form-note {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12.5px;
+    text-align: center;
+}
+
+/* ------------------------------------------------------------------ */
+/* Layar sukses                                                        */
+/* ------------------------------------------------------------------ */
+
+.success-screen {
+    position: fixed;
+    inset: 0;
+    overflow: auto;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background:
+        radial-gradient(900px 460px at 50% -10%, #FFE8D2 0%, transparent 60%),
+        radial-gradient(900px 500px at 100% 110%, #D9F5F2 0%, transparent 55%),
+        #F7F8FC;
+}
+
+.success-card {
+    width: min(560px, 100%);
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 34px 32px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.success-icon {
+    width: 78px;
+    height: 78px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--green-soft);
+    border: 1px solid #A7F3D0;
+    color: #059669;
+    font-size: 38px;
+    font-weight: 800;
+}
+
+.success-card h1 {
+    font-size: 26px;
+    margin-bottom: 6px;
+}
+
+.success-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 22px 0;
+}
+
+.success-meta > div {
+    background: #F8FAFC;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.success-meta span {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.success-meta strong {
+    font-size: 18px;
+    letter-spacing: 0.01em;
+}
+
+.countdown-text {
+    color: var(--muted);
+    font-size: 13.5px;
+    margin-bottom: 10px;
+}
+
+.progress {
+    height: 8px;
+    border-radius: 99px;
+    background: #F1F5F9;
+    overflow: hidden;
+    margin-bottom: 22px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--orange), var(--orange-2));
+    transition: width 0.9s linear;
+}
+
+.success-card .btn {
+    min-height: 52px;
+    width: min(320px, 100%);
+    font-size: 16px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Layar pendek / kecil                                                */
+/* ------------------------------------------------------------------ */
+
+@media (max-height: 760px) {
+    .kiosk-header {
+        padding: 8px 20px;
+    }
+
+    .kiosk-brand img {
+        width: 38px;
+        height: 38px;
+    }
+
+    .kiosk-brand strong {
+        font-size: 15px;
+    }
+
+    .kiosk-clock #clock {
+        font-size: 22px;
+    }
+
+    .kiosk-main {
+        padding: 10px 20px 2px;
+        gap: 10px;
+    }
+
+    .kiosk-cta {
+        min-height: 60px;
+        font-size: 19px;
+    }
+
+    .kiosk-welcome {
+        display: none;
+    }
+}
+
+@media (max-width: 720px) {
+    .kiosk-header {
+        padding: 10px 14px;
+    }
+
+    .kiosk-brand strong {
+        font-size: 14px;
+        white-space: normal;
+    }
+
+    .kiosk-brand span {
+        display: none;
+    }
+
+    .kiosk-clock #clock {
+        font-size: 20px;
+    }
+
+    .kiosk-clock small {
+        font-size: 10px;
+    }
+
+    .kiosk-main {
+        padding: 10px 12px 2px;
+    }
+
+    .form-card {
+        padding: 22px 18px;
+        border-radius: 18px;
+    }
+
+    .form-card h1 {
+        font-size: 23px;
+    }
+
+    .success-meta {
+        grid-template-columns: 1fr;
+    }
+}
